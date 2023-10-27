@@ -143,15 +143,11 @@ main()
         colors[1]="dark_gray"
         script="${script} not found!"
       fi
-    if [ $plugin = "logging_status" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-logging-colors" "orange dark_gray")
-        script="#($current_dir/logging_status.sh)"
     fi
 
     if [ $plugin = "git" ]; then
       IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-git-colors" "green dark_gray")
         script="#($current_dir/git.sh)"
-    fi
 
     elif [ $plugin = "cwd" ]; then
       IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-cwd-colors" "dark_gray white")
@@ -260,6 +256,11 @@ main()
     elif [ $plugin = "synchronize-panes" ]; then
       IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-synchronize-panes-colors" "cyan dark_gray")
       script="#($current_dir/synchronize_panes.sh $show_synchronize_panes_label)"
+
+    elif [ $plugin = "logging_status" ]; then
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-logging-colors" "orange dark_gray")
+        script="#($current_dir/logging_status.sh)"
+
     else
       continue
     fi
